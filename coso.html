@@ -4,21 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>notanatlasCopy</title>
+    <link rel="stylesheet" href="estilos_coso.css">
+
 </head>
 <body> <!--cuerpo / contenido --> 
     <!-- Introduccion -->
-    <style>
-    .texto {
-        color: #444;
-        font-family: Arial, sans-serif;
-    }
-    
-    .enlace-destacado {
-        font-weight: 700; /* 700 es igual a 'bold' */
-        color: black;
-        text-decoration: none; /* Elimina el subrayado */
-    }
-    </style>
+     <header class="site-header">
+        <div class="header-branding">
+            <a href="https://notanatlas.org/">
+            <img src="IMGS/logoatlas.png" alt="Logo" class="header-logo-icon"> </a>
+            <a href="https://notanatlas.org/" class="brand-name">THIS IS NOT AN ATLAS</a>
+        </div>
+
+        <nav class="header-nav"> <!-- Menu de navegacion -->
+            <ul class="nav-links"> <!-- Lista de enlaces -->
+                <li><a href="https://notanatlas.org/#atlas-maps">MAPS</a></li>
+                <li><a href="https://notanatlas.org/book/">BOOK</a></li>
+                <li><a href="https://notanatlas.org/news/">NEWS</a></li>
+                <li><a href="https://notanatlas.org/videos/">VIDEOS</a></li>
+                <li><a href="https://Rodo996.github.io/coso.html" class="active">ABOUT</a></li>
+                
+                <li><a href="https://notanatlas.org/about/#header-search-wrap" class="search-icon">&#128269;</a></li> 
+            </ul> 
+        </nav>
+    </header>
     <h1 style="text-align: center;">About</h1>
     <h2>Who is kollektiv orangotango?</h2>
     <p> 
@@ -59,90 +68,88 @@
 <p> </p>
 <img src="/IMGS/IMG3.jpeg" alt="Imagen nuemro 3 de la pagina" style="display: block; margin-left: auto; margin-right: auto; width: 80%;">
 
-<h3 style="text-align: left;">Realized by: </h3>
-<!-- Parte de logo, (Hecho por) -->
+<!-- Parte de la seccion de abajo donde esta la informacion de contacto-->
+<!-- el div sirve para agrupar varios elementos (imágenes, textos, enlaces) y tratarlos como una sola unidad.-->
+<!-- Un <div> (HTML) es ESTRUCTURA (Contenedor). No "hace" nada, no calcula, no piensa. Solo "sostiene" cosas.-->
 
-<a href="http://orangotango.info/">
-    <img src="IMGS/Logo_KO.png" alt="Kollektiv Orangotango logo" style="align-items: baseline;" width="250" height="75">
-</a>
-<p> </p>
+<div class="footer-section">
+<!-- Seccion de autor quien realizo la pagina -->
 
-<!-- Parte de redes sociales -->
-<h3 style="text-align: left;">Find us on: </h3>
+    <div class="footer-label">REALIZED BY</div>
+    <div class="footer-content">
+        <a href="http://orangotango.info/">
+            <img src="IMGS/Logo_KO.png" alt="Kollektiv Orangotango" style="max-width: 300px; height: auto;">
+        </a>
+    </div>
 
-<a href="https://mastodon.social/@orangotango">
-    <img src="IMGS/mastodon-black-icon.png " loading="lazy" decoding="async" alt="Mastodon page" style="align-items: baseline;" width="50" height="50">
-</a>
+<!-- Seccion de contacto de redes -->
 
-<a href="https://www.instagram.com/orangotango_not.an.atlas/">
-    <img  src="IMGS/iconmonstr-instagram-14-64.png" alt="Instagram page" style="align-items: baseline;" width="50" height="50">
-</a>
+    <div class="footer-label">FIND US ON</div>
+    <div class="footer-content social-icons">
+        <a href="https://mastodon.social/@orangotango"><img src="IMGS/mastodon-black-icon.png" alt="Mastodon" width="50" height="50"></a>
+        <a href="https://www.facebook.com/not.an.atlas/"><img src="IMGS/iconmonstr-facebook-4-64.png" alt="Facebook" width="50" height="50"></a>
+        <a href="https://www.instagram.com/orangotango_not.an.atlas/"><img src="IMGS/iconmonstr-instagram-14-64.png" alt="Instagram" width="50" height="50"></a>
+        <a href="https://vimeo.com/kollektivorangotango"><img src="IMGS/iconmonstr-vimeo-4-64.png" alt="Vimeo" width="50" height="50"></a>
+        <a href="https://www.youtube.com/channel/UCSxoFO-V9IW8jB9zydq4MSw/"><img src="IMGS/iconmonstr-youtube-4-64.png" alt="Youtube" width="50" height="50"></a>
+    </div>
 
-<a href="https://www.facebook.com/not.an.atlas/">
-    <img src="IMGS/iconmonstr-facebook-4-64.png" alt="Facebook page" style="align-items: baseline;" width="50" height="50">
-</a>
+<!-- Seccion de mas informacion por correo -->
 
-<a href="https://vimeo.com/kollektivorangotango">
-    <img src="IMGS/iconmonstr-vimeo-4-64.png" alt="Vimeo page" style="align-items: baseline;" width="50" height="50">
-</a>
+    <div class="footer-label">NEWSLETTER</div>
+    <div class="footer-content newsletter-section">
+        <form class="newsletter-form">
+            <input type="email" placeholder="Email *" required>
+            <input type="submit" value="SUBSCRIBE!">
+        </form>
+        <p class="small-text">
+            You can unsubscribe at any time and we’ll never sell, swap or share your details with anyone else. 
+            Read our <a href="/privacy-policy" class="enlace-destacado">privacy policy</a>.
+        </p>
+    </div>
 
-<a href="https://www.youtube.com/channel/UCSxoFO-V9IW8jB9zydq4MSw/">
-    <img src="IMGS/iconmonstr-youtube-4-64.png" alt="Youtube page" style="align-items: baseline;" width="50" height="50">
-</a>
+<!-- Seccion de patrocinio principal -->
 
+    <div class="footer-label">SUPPORT</div>
+    <div class="footer-content support-logos">
+        <a href="https://www.rosalux.de/en/"><img src="IMGS/Rosa-Luxemburg-Stiftung.png" alt="Rosa Lux"></a>
+        <a href="https://monde-diplomatique.de/"><img src="IMGS/lmd_d.png" alt="Monde Diplomatique"></a>
+        <a href="http://www.transcript-verlag.de/en"><img src="IMGS/transcript.png" alt="Transcript"></a>
+    </div>
 
-<!-- esto probablemente sea con java-->
-<h3 style="text-align: left;">Newsletter: </h3>
-<div class="mailpoet_paragraph">
-    <input type="email" autocomplete="email" class="mailpoet_text" id="form_email_1" name="data[form_field_MGQwMjhjOTgzYjg5X2VtYWls]" title="Email" value="" data-automation-id="form_email" placeholder="Email *" aria-label="Email *" data-parsley-errors-container=".mailpoet_error_6ug41" data-parsley-required="true" required="" aria-required="true" data-parsley-minlength="6" data-parsley-maxlength="150" data-parsley-type-message="This value should be a valid email." data-parsley-required-message="This field is required.">
-    <span class="mailpoet_error_6ug41"></span>
+<!-- Seccion otros patrocioneos -->
+
+    <div class="footer-label">ALSO SUPPORTED BY</div>
+    <div class="footer-content supported-text">
+        <a class="enlace-destacado" href="https://anstiftung.de/english">anstiftung</a> |
+        <a class="enlace-destacado" href="http://transformap.co/">transformap</a> |
+        <a class="enlace-destacado" href="http://www.asa-ff.de/">ASA FF</a>
+    </div>
+
+<!-- Seccion legal -->
+    <div class="footer-label">LEGAL</div>
+    <div class="footer-content legal-section">
+        <a href="https://notanatlas.org/wp-content/uploads/2018/06/creativecommonsby.png" class="enlace-destacado">
+            <img src="IMGS/creativecommonsby-135x70.png" alt="CC License" width="70">
+        </a>
+        <p class="small-text">
+            Except where otherwise <a href="https://creativecommons.org/policies#license" class="enlace-destacado">noted</a>, content on this site is licensed under a 
+            <a href="https://creativecommons.org/licenses/by/4.0/" class="enlace-destacado">Creative Commons Attribution 4.0 International license</a>
+        </p>
+    </div>
+</div> 
+<!-- Barra de legal al final de la pagina -->
+<div class="legal-bar">
+        <a href="https://notanatlas.org/impressum" class="legal-link blue-link">IMPRESSUM</a> 
+        
+        <span class="separator">|</span> <!-- Separador entre enlaces legales  -->
+        <!-- <span> (Inline): Es humilde. Se queda en su lugar, fluyendo con el texto, y solo afecta lo que encierra.-->
+        <!-- en este caso lo usamas para la barrita separadora que queremos que no cambie de color y se quede ahí-->
+
+        <a href="mailto:contact@notanatlas.org" class="legal-link gold-link">CONTACT@NOTANATLAS.ORG</a> <!-- Correo de contacto, lo de mailto fue sugerido por visual-->
+        <!-- el mailto es un protocolo especial diseñado para correos electronicos, lo que hace que el navegador piense que es un correo porque tiene esa clave de "mailto" entonces le pasa la chamba a otra app que mande correos-->
+        
+        <a href="https://notanatlas.org/privacy-policy" class="legal-link gold-link">PRIVACY POLICY</a>
 </div>
-
-<div class="mailpoet_paragraph">
-    <input type="submit" class="mailpoet_submit" value="Subscribe!" data-automation-id="subscribe-submit-button" style="border-color:transparent;">
-    <span class="mailpoet_form_loading">
-    <span class="mailpoet_bounce1"></span>
-    <span class="mailpoet_bounce2"></span>
-    <span class="mailpoet_bounce3"></span>
-    </span>
-</div>
-<!---================================================================--->
-<p> You can unsubscribe at any time and we’ll never sell, swap or share your details with anyone else. Read our <a href="/privacy-policy" class="enlace-destacado">privacy policy</a>
-.</p>
-
-<!-- Parte de apoyos -->
-<h3 style="text-align: left;">Support: </h3>
-<a href="https://www.rosalux.de/en/">
-    <img src="IMGS/Rosa-Luxemburg-Stiftung.png" alt="Rosalux logo" style="align-items: center;" width="150" height="150">
-</a>
-<p> </p>
-<a href="https://monde-diplomatique.de/">
-    <img src="IMGS/lmd_d.png" alt="Monde Diplomatique logo" style="align-items: center;" width="150" height="150">
-</a>
-<p> </p>
-<a href="http://www.transcript-verlag.de/en">
-    <img src="IMGS/transcript.png" alt="Medico logo" style="align-items: center;" width="150" height="150">
-</a>
-
-<!-- Parte de otros apoyos, los sponsors -->
-<h3 style="text-align: left;">Also supported by: </h3>
-<p><a class="alsosupport" href="https://anstiftung.de/english" >anstiftung</a> |
-    <a class="alsosupport" href="http://transformap.co/" >transformap</a> |
-    <a class="alsosupport" href="http://www.asa-ff.de/" >ASA FF</a></p>
-
-
-<!-- Parte legal-->
-<h3 style="text-align: left;">Legal: </h3>
-<a href="https://notanatlas.org/wp-content/uploads/2018/06/creativecommonsby.png">
-    <img src="IMGS/creativecommonsby-135x70.png" alt="Creative Commons License" width="70" height="40">
-</a>
-
-<p class="texto">
-  Except where otherwise 
-  <a href="https://creativecommons.org/policies#license" class="enlace-destacado">noted</a>, 
-  content on this site is licensed under a 
-  <a href="https://creativecommons.org/licenses/by/4.0/" class="enlace-destacado">Creative Commons Attribution 4.0 International license</a>
-</p>
 
 </body>
 </html>
