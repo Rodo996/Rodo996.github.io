@@ -1,6 +1,19 @@
 body {
-    background-color: gainsboro; /* Ahora sí se verá rojo intenso */
-    color: aqua; /* El texto será color aqua */
+    background-color: gainsboro; 
     color: #444;
     font-family: Arial, sans-serif;
+}
+
+#contenedor {
+    width: auto;
+    border: 10px solid #00f934;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+div.elemento{
+    width: 400px;
+    border : 10px solid #f90000;
 }
