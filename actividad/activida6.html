@@ -1,0 +1,13 @@
+ <script>
+ async function obtenerJSON() {
+            const respuesta = await fetch('Untitled-1.json');  
+            const datos = await respuesta.json();
+            let d=document.createElement("p");
+            d.textContent=datos.cancion;
+            document.getElementById("encabezado").appendChild(d);
+            d.setAttribute("class", "amarillo");
+            console.log(d);
+        }
+        obtenerJSON();
+    </script>
+    <h1  id = "encabezado" class="rosa">HTML, actividad 6</h1>
