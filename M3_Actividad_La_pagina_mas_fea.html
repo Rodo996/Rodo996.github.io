@@ -6,8 +6,12 @@
     <title>Activity</title>
 </head>
 <body>
-    <h1>Actividad Explicacion de HTML, CSS y JavaScript</h1>
-    <h3>Primero que es el HTML?</h2>
+    <h1 style="text-align: center;">Actividad Explicacion de HTML, CSS y JavaScript</h1>
+    <!--
+What is HTML?
+Explain the head and the body tags
+-->
+    <h2>Introducción: Primero que es el HTML?</h2>
     <p> 
         Html es un lenguaje de etiquetas que para entender que esto de "lenguaje de etiquetas"
         lo puedes pensar como algo que haces para dar estructura a una pagina web, así que el html es como
@@ -18,6 +22,12 @@
         que son datos que no son visibles para el usuario pero que ayudan a los motores de busqueda a entender tu sitio, y el body es donde va todo el contenido visible para el usuario, como texto, imagenes, enlaces, etc.
     </div>
     <div>
+        <!--
+        Explain the section, article, aside, header, footer tag?
+        Create an unordered list. Create an ordered list.
+        Create a basic table using html.
+        -->
+        <h2>Etiquetas Básicas</h2>
         <p></p> Otras etiquetas importantes son:
         <span style="color: red;">header</span> (Encabezado): Es la parte superior. Aquí suele ir el logo, el nombre de la página y el menú de navegación. Es como la portada de un libro.
         <span style="color: red;">nav</span> (Navegación): Se usa específicamente para los menús con enlaces.
@@ -43,19 +53,194 @@
         y dentro de cada fila usas la etiqueta <span style="color: red;">td</span> para cada celda.
     </div>
 
-    <h2>CSS</h2>
-    <h3> introducción </h3>
+    <div>
+    <h2>CSS introducción</h2>
+<!-- What is CSS?
+What is the purpose of CSS?
+-->
     <p>
         CSS es un lenguaje de estilos que se utiliza para describir la presentación de un documento HTML. 
         Con CSS puedes controlar el diseño, los colores, las fuentes, el espaciado y otros aspectos visuales de tu sitio web.
         Es como la ropa que le pones a tu sitio web para que se vea bonito y atractivo.
     </p>
-
-<!--
-What is HTML?
-Explain the head and the body tags
+<!-- 
+How do you apply a CSS to an HTML (explain the 3 options)
+What is a selector? What is a CSS rule? 
 -->
+    <p>
+        Ahora ya que tienes HTML que podrían decirse que son los ladrillos y el esqueleto de tu sitio, ahora usamos CSS que es como el diño de interiores
+        decide los colores, las fuentes, el tamaño, el espaciado, etc. para que tu sitio se vea bonito y atractivo.
+        <br>
+        <b>Para aplicar CSS a tu HTML tienes 3 opciones:</b> 
+        <br>
+        1. CSS en línea: Es cuando aplicas el estilo directamente en la etiqueta HTML usando el atributo "style". Por ejemplo: <span style="color: red;">&lt;h1 style="color: blue;"&gt;Hola Mundo&lt;/h1&gt;</span>
+        <br>
+        2. CSS interno: Cuando escribes el codigo CSS dentro de tu archivo HTML usando la etiqueta <span style="color: red;">&lt;style&gt;</span> dentro del <span style="color: red;">&lt;head&gt;</span>. Por ejemplo:
+        <span style="color: red;">&lt;style&gt;
+            h1 {
+                color: blue;
+            }
+        &lt;/style&gt;</span>
+        <!-- lt y gt son para poner los simbolos de <> en el texto como un ejemplo-->
+        <br>
+        3. CSS externo: Es la forma más común y recomendada, es cuando creas un archivo separado con extensión .css donde escribes todo tu código CSS y luego lo enlazas a tu archivo HTML usando la etiqueta <span style="color: red;">&lt;link&gt;</span> dentro del <span style="color: red;">&lt;head&gt;</span>. Por ejemplo:
+        <span style="color: red;">&lt;link rel="stylesheet" href="estilos.css"&gt;</span>
+        <br>
+        <b>Regla y selector:</b>
+        <br>
+        Dentro de CSS tenemos reglas y selesctores, pero que es eso?
+        <br>
+        Una <b>Regla</b> CSS es la instrucción completa de diseño que le damos a la computadora. Imagina que le dices a un pintor: "Pinta todas las puertas de color rojo". Esa frase completa es la regla.
+        <br>
+        Para que esto funcione entra el selector, y se divide en partes:
+        <br>
+        <b>El Selector:</b> Es la parte de la regla que busca y "selecciona" a qué elemento de tu HTML le vas a cambiar el diseño (en nuestra analogía, serían "las puertas").
+        <br>
+        <b>La Declaración:</b> Es lo que va entre llaves { } e indica qué quieres cambiar (la propiedad, ej: el color) y cómo lo vas a dejar (el valor, ej: rojo).
+        <br>
+        <b>Ejemplo de cómo se escribe una Regla CSS:</b>
+        <br>
+        <span style="text-align: center;">    
+            p {
+            <br>
+            color: blue;
+            <br>
+            font-size: 20px;
+            <br>
+            }
+            <br>
+        </span>
+        <br>
+        Donde:
+        <br>
+            <b>p</b> es el Selector (le dice al navegador: "busca todos los párrafos de texto").
+            <br>
+            Todo el bloque completo es la Regla CSS (que dice: "haz que la letra sea azul y de tamaño 20 pixeles").
+    </p>
+    </div>
+    <div>
+    <h2>CSS Básico</h2>
+    <!--
+    Explain a:	
+    Tag Selector
+    Class Selector
+    Tag and Class Selector
+    Id Selector
 
+    What is a class? What is an id? How are they related to CSS?
+    Explain the CSS Box Model? Show an example.
+    Explain the media queries
+    -->
+        Si usas la etiqueta <span style="color: red;">&lt;p&gt;</span> para hacer 10 párrafos en tu HTML, pero en CSS dices "pinta los <span style="color: red;">&lt;p&gt;</span> de rojo", ¡los 10 se van a pintar de rojo! ¿Qué pasa si solo querías pintar uno?
+        <br>
+        Ahí es donde entran las Clases y los IDs. Son como "gafetes con tu nombre" que le pegas a tus elementos HTML para que CSS los pueda reconocer de forma individual o en grupos.
+        <br>
+        ¿Qué es una Clase y qué es un ID?
+        <br>
+        Clase (Class): Imagina que es como el uniforme de un equipo. Muchas personas pueden usar el mismo uniforme. Si le pones una clase llamada destacado a varios textos o imágenes, a todos les puedes aplicar el mismo diseño a la vez.
 
+        ID (Identificador): Imagina que es como el número de pasaporte. Es único. Solo un elemento en toda tu página web puede tener ese ID específico. Sirve para apuntar a un elemento muy particular (como el logo principal o el menú de arriba).
+
+        ¿Cómo se relacionan con CSS?
+        En HTML tú le pegas el gafete al elemento (ej. <p class="destacado">Hola</p>), y luego en CSS usas los selectores para buscar esos gafetes y darles estilo.
+        <br>
+        <p>Ejemplo de Selectores en CSS:</p>
+        <b>1. Tag Selector (Selector de Etiqueta)</b>
+        <br>
+        Busca a los elementos por su nombre de etiqueta HTML, sin importar nada más.
+        <br>
+        Ejemplo en CSS: p { color: blue; }
+        <br>
+        ¿Qué hace?: Pinta todos los párrafos de tu página de azul.
+        <br>
+        <b>2. Class Selector (Selector de Clase)</b>
+        <br>
+        Busca cualquier elemento que tenga una clase específica. En CSS, las clases siempre empiezan con un punto (.).
+        <br>
+        Ejemplo en CSS: .destacado { color: red; }
+        <br>
+        ¿Qué hace?: Pinta de rojo cualquier cosa que tenga esa clase, ya sea un párrafo, un título o una tabla.
+        <br>
+        <b>3. Tag and Class Selector (Selector de Etiqueta y Clase)</b>
+        <br>
+        Es más estricto. Busca una etiqueta específica que además tenga una clase específica. Se escriben juntos, sin espacios.
+        <br>
+        Ejemplo en CSS: p.destacado { color: green; }
+        <br>
+        ¿Qué hace?: Pinta de verde solo a los párrafos que tengan la clase "destacado". Si un título <span style="color: red;">&lt;h1&gt;</span> tiene esa misma clase, lo va a ignorar porque no es un párrafo.
+        <br>
+        <b>4. Id Selector (Selector de ID)</b>
+        <br>
+        Busca al elemento único que tiene ese ID. En CSS, los IDs siempre empiezan con el símbolo de gato o numeral (#).
+            <br>
+        Ejemplo en CSS: #titulo-principal { font-size: 50px; }
+            <br>
+        ¿Qué hace?: Le cambia el tamaño de letra únicamente al elemento que tiene el ID "titulo-principal".
+
+        <h3>CSS Box Model</h3>
+        Este es el concepto visual más importante del diseño web. En internet, <b> absolutamente todo es una caja rectangular </b>, incluso si visualmente es un círculo o solo un texto.
+        <br>
+        Cada una de estas <b> "cajas"</b> está formada por 4 capas, como si fuera un cuadro colgado en la pared:
+        <br>
+        1. Content (Contenido): Es la foto en sí. El texto, la imagen o lo que sea que pusiste en tu HTML.
+<br>
+        2. Padding (Relleno interno): Es el espacio entre la foto y su marco (la "marialuisa" o paspartú del cuadro). Da aire hacia adentro.
+<br>
+        3. Border (Borde): Es el marco de madera de tu cuadro. Puede ser grueso, delgado, de colores o invisible.
+<br>
+        4. Margin (Margen externo): Es el espacio invisible que hay fuera del marco. Es la distancia entre tu cuadro y el cuadro del vecino en la misma pared. Empuja a los demás elementos para que no se amontonen.
+    
+        <h3>Media Queries</h3>
+        ¿Te has fijado que una página web se ve de una forma en tu computadora, pero si la abres en tu celular, el menú cambia y las columnas se apilan para que quepa en la pantalla? Eso se logra con las <b>Media Queries. </b>
+<br>
+Son una forma de hacerle una "pregunta" al navegador de tu usuario antes de aplicar el diseño. Le dicen al CSS:
+<br> "Oye, si la pantalla de este usuario es más pequeña que el tamaño de un celular, entonces ignora las reglas anteriores y aplica estas reglas nuevas".
+<p>Ejemplo de Media Query en CSS:</p>
+<span style="color: red;">
+    <br>
+<span style="color: green;">/* Regla normal para computadoras: */</span>
+<br>
+p { font-size: 20px; }
+<br>
+<span style="color: green;">/* Media Query: Si la pantalla mide 600px de ancho o menos (celulares): */</span>
+<br>
+@media (max-width: 600px) {
+    <br>
+  p { font-size: 14px; } <span style="color: green;">/* Haz la letra más chiquita para que quepa */</span>
+  <br>
+}</span>
+</div>
+
+<div>
+    <h2>Layout CSS</h2>
+   <!--
+    Explain display: grid
+    Explain display: flex
+    -->
+    <p>
+        Para acomodar elementos en tu pagina, existen actualmente flex y grid. 
+        <br>
+        Estas dos herramientas son "sistemas de diseño" que le dicen a la computadora cómo organizar las cajas (el Box Model que vimos antes) dentro de tu pantalla.
+    
+        <br>
+        <b>Display: Flex</b>
+        <br>
+        Piensa en Flexbox como un estante o una repisa. Está diseñado para acomodar cosas en una sola dirección a la vez: ya sea en una fila (horizontal) O en una columna (vertical).
+        <br>
+        Es perfecto para alinear elementos, centrarlos perfectamente o distribuir el espacio sobrante entre ellos de forma equitativa.
+        <br>
+        Ejemplo conceptual:
+        Si tienes una caja con 3 botones adentro, por defecto se pondrían uno debajo del otro. Pero si a la caja padre le pones display: flex, los botones se formarán automáticamente en una sola línea horizontal.
+        <br>
+        <b>Display: Grid</b>
+        <br>
+        Si Flexbox es un estante, Grid es un tablero de ajedrez o una hoja de Excel. Está diseñado para trabajar en dos direcciones al mismo tiempo: filas Y columnas.
+        <br>
+        Con Grid, tú dibujas una cuadrícula invisible en tu página y luego decides en qué "celda" exacta va cada elemento.
+        <br>
+        Incluso puedes hacer que un elemento ocupe varias celdas a la vez (por ejemplo, un título gigante que cruce toda la parte superior).
+    </p>
+
+</div>
 </body>
 </html>
