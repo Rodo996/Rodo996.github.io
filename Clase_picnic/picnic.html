@@ -23,12 +23,12 @@
   
 
   <button id="musico">Ve por mi artista favorito</button>
-  <button class="success"> Ve por otro artista preferido</button>
+  <button id="otroArtista" class="success"> Ve por otro artista preferido</button>
   <div class="flex two four-1200 demo">
     <div id="bio">1</div>
     <div id="imagen">2</div>
-    <div>3</div>
-    <div>4</div>
+    <div id="bio2">3</div>
+    <div id="imagen2">4</div>
     <div>5</div>
     <div>6</div>
     <div>7</div>
@@ -69,28 +69,48 @@
     let biografia;
 
     document.addEventListener("DOMContentLoaded", function() {
-         // biografia = document.getElementById();
-         // document.getElementById().addEventListener("click", );
+          biografia = document.getElementById("bio");
+          document.getElementById("musico").addEventListener("click", obtenerJSON);
+          imagen = document.getElementById("imagen");
+
+
+          biografia2 = document.getElementById("bio2");
+          document.getElementById("otroArtista").addEventListener("click", obtenerJSON2);
+          imagen2 = document.getElementById("imagen2");
           //console.log("DOM listo");
+          
     });
 
 
      async function obtenerJSON() {
-       // const respuesta = await fetch('https://www.theaudiodb.com/api/v1/json/123/search.php?s=');  
-       // const datos = await respuesta.json();
-       // console.log(datos);
+        const respuesta = await fetch('https://www.theaudiodb.com/api/v1/json/123/search.php?s=Ed_Sheeran');  
+        const datos = await respuesta.json();
+        console.log(datos);
 
         const textoArtista = document.createElement('p');
-        //textoArtista.textContent = 
-        //biografia.appendChild(textoArtista);
-
-        //const imagenArtista= document.createElement('');
+        textoArtista.textContent = datos.artists[0].strBiographyEN;
+        biografia.appendChild(textoArtista);
         
-        //imagenArtista.setAttribute('src', '');
+
+        const imagenArtista= document.createElement('img');
+        imagenArtista.setAttribute('src', datos.artists[0].strArtistThumb);
+        imagen.appendChild(imagenArtista);
+
+       
      }
+ async function obtenerJSON2() {
+        const respuesta2 = await fetch('https://www.theaudiodb.com/api/v1/json/123/search.php?s=Bruno_Mars');
+        const datos2 = await respuesta2.json();
+        //console.log(datos2);
 
+        const textoArtista2 = document.createElement('p');
+        textoArtista2.textContent = datos2.artists[0].strBiographyEN;
+        biografia2.appendChild(textoArtista2);
 
-
+        const imagenArtista= document.createElement('img');
+        imagenArtista.setAttribute('src', datos2.artists[0].strArtistThumb);
+        imagen2.appendChild(imagenArtista);
+ }
     </script>
 </body>
 </html>
