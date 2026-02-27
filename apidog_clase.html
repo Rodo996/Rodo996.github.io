@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
+
+</head>
+<body>
+    <button id="apidog">Dog</button>
+    <button id="apiimg">img</button>
+    <button id="votar">Votar</button>
+    <div class="flex two four-1200 demo">
+    <div id="apidog">1</div>
+    <div id="img">Perro</div>
+    <div id="vote">Votaciao</div>
+
+    
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+          apidog = document.getElementById("apidog");
+          document.getElementById("apidog").addEventListener("click", irPorAlgo);
+          imagen = document.getElementById("apiimg");
+          document.getElementById("apiimg").addEventListener("click", irPorIMG);
+          vote = document.getElementById("votar");
+          document.getElementById("votar").addEventListener("click", votar);
+    });
+    
+
+    async function irPorAlgo() {
+        try {
+                const respuesta = await fetch("https://api.thedogapi.com/v1/facts/random",      {
+                method: "GET", 
+                headers: {
+                    "x-api-key": "live_ENqTCYoYuL0KO6HUdlXrdW2Q7mr1UgnVDk1QdDeymnGpUyFRv1sbBauDDP2e1BlO"
+                }
+        });
+            if (!respuesta.ok) {
+            console.log("Error");
+            //throw new Error("Error");
+            }
+            const data = await respuesta.json();
+            console.log(data);
+         
+        } catch (error) {
+            console.error("Error:", error.message);
+        }
+        }
+
+
+        async function irPorIMG() {
+            try {
+                    const respuesta = await fetch("https://api.thedogapi.com/v1/breeds?limit=1",{
+                    method: "GET", 
+                    headers: {
+                        "x-api-key": "live_ENqTCYoYuL0KO6HUdlXrdW2Q7mr1UgnVDk1QdDeymnGpUyFRv1sbBauDDP2e1BlO"
+                    }
+            });
+
+
+            const imagenArtista= document.createElement('img');
+            imagenArtista.setAttribute('src', 'https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg');
+            imagen = document.getElementById("img");
+            imagen.appendChild(imagenArtista);
+
+                if (!respuesta.ok) {
+                console.log("Error");
+                //throw new Error("Error");
+                }
+                const data = await respuesta.json();
+                console.log(data);
+            } catch (error) {
+                console.error("Error:", error.message);
+            }
+        }
+
+
+
+
+        async function votar() {
+        try {
+                const respuesta = await fetch("https://api.thedogapi.com/v1/votes",
+                {
+                    method: 'POST', 
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-api-key': "live_ENqTCYoYuL0KO6HUdlXrdW2Q7mr1UgnVDk1QdDeymnGpUyFRv1sbBauDDP2e1BlO"
+                    },
+                    body: JSON.stringify({
+                    image_id: 'BJa4kxc4X',
+                    value: 1
+                })
+                });
+            const VOTAR= document.createElement('img');
+            VOTAR.setAttribute('src', 'https://api.thedogapi.com/v1/votes');
+            VATADO = document.getElementById("vote");
+            VATADO.appendChild(VOTAR);
+
+            if (!respuesta.ok) {
+            console.log("Error");
+            //throw new Error("Error de algo");
+            }
+            const data = await respuesta.json();
+            console.log(data);
+        } catch (error) {
+            console.error("Error:", error.message);
+        }
+        }
+
+    </script>
+</body>
+</html>
