@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenida - Buscando Huellas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fdfbf7;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .hero {
+            background-color: #ff9800;
+            color: white;
+            padding: 50px 20px;
+            border-bottom: 5px solid #e65100;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .hero p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .contenido {
+            padding: 40px 20px;
+        }
+        .navegacion {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .btn-equipo {
+            background-color: #2196F3;
+        }
+        .btn-equipo:hover {
+            background-color: #1976d2;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h1>¡Bienvenido a Buscando Huellas! 🐾</h1>
+        <p>Ayudando a que cada perrito perdido regrese a casa y encontrando nuevas familias.</p>
+    </header>
+
+    <main class="contenido">
+        <h2>¿Qué te gustaría hacer hoy?</h2>
+        <p>Explora nuestras secciones para conocer más sobre nuestra misión y los peludos que nos necesitan.</p>
+        
+        <div class="navegacion">
+            <a href="/mascotas" class="btn">Ver Mascotas</a>
+            <a href="/adoptantes" class="btn">Ver Adoptantes</a>
+            <a href="/equipo" class="btn btn-equipo">Conoce al Equipo</a>
+        </div>
+    </main>
+
+</body>
+</html>
