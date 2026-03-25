@@ -28,12 +28,10 @@ import fs from 'fs';
     function getMascotas(req, res) {
         //Esto representa un objeto JSON de una mascota
         //Agrega otra mascota
-        const mascotas = {
-            "nombre": "Pikachu",
-            "color": "Amarillo",
-            "nombre": "Bulbasaur",
-            "color": "Verde"
-          };  
+        const mascotas = [
+    { "nombre": "Pikachu", "color": "Amarillo" },
+    { "nombre": "Bulbasaur", "color": "Verde" }
+]; 
       res.writeHead(200, { 'Content-Type': 'application/json' });
       
       //Escribe qué hace la función stringify y por qué la tenemos que usar
@@ -68,11 +66,37 @@ import fs from 'fs';
         });
       }
 
+      function mostrarEquipo(req, res) {
+        fs.readFile('equipo.html', 'utf8', (error, data) => {
+            if (error) {
+                res.writeHead(500, { 'Content-Type': 'text/plain' });
+                res.end('Oh no!!!! Error interno del servidor.');
+                return;
+            }
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.end(data);
+        });
+      }
+      function mostrarOpinion(req, res) {
+        fs.readFile('opinion.html', 'utf8', (error, data) => {
+            if (error) {
+                res.writeHead(500, { 'Content-Type': 'text/plain' });
+                res.end('Oh no!!!! Error interno del servidor.');
+                return;
+            }
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.end(data);
+        });
+      }
     //Esta función deberá enviar un json con los datos de las adoptantes
     function getAdoptantes(req, res) {
+      adoptantes=[
+    { "nombre": "Ash Ketchum", "edad": 10 },
+    { "nombre": "Misty", "edad": 12 }
+      ]
     //Tienes que corregir varias cosas en esta sección
       res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ message: 'Aquí van los datos de los adoptantes' }));
+      res.end(JSON.stringify(adoptantes));
     }
 
     function manejarRuta404(req, res) {
@@ -97,12 +121,25 @@ import fs from 'fs';
       } 
       else if (url === '/adoptantes') {
         mostrarAdoptantes(req, res);
-      } 
+      } else if (url === '/equipo') {
+        mostrarEquipo(req, res);
+      } else if (url === '/opinion') {
+        mostrarOpinion(req, res);
+      }
+      else {
+    // Aquí debería ir tu manejarRuta404(req, res) si ninguna ruta coincide
+    manejarRuta404(req, res);
+    }
       //Agrega una ruta /equipo y su función correspondiente para que muestre el equipo del proyecto
       //Haz una página equipo.html correspondiente
       //Escribe el nombre completo y una cualidad que valores en esa persona de tu equipo
       //Trata de agregar una imagen a equipo.html
       //Explica si la puedes ver, en caso negativo ¿qué crees que pase?
+
+      /* La imagen no se puede ver en el archivo HTML 
+      Esto sucede porque el servidor no tiene una ruta /foto-equipo.jpg, asi que no sabe cómo entregar ese archivo y terminará cayendo en tu función manejarRuta404.
+      por estar hardcodeado no se puede.
+      */ 
 
       //Agrega una ruta /opinion
       // Haz una página opinion.html
@@ -110,10 +147,6 @@ import fs from 'fs';
       //¿Qué es el freedombox?
       //https://www.aljazeera.com/opinions/2019/3/13/digital-colonialism-is-threatening-the-global-south
       
-      
-      else {
-        manejarRuta404(req, res);
-      }
     });
 
     const puerto = 1984;
