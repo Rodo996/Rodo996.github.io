@@ -1,0 +1,15 @@
+{
+  "name": "actividad_5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "servidor.js",
+  "type": "module",  
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node servidor.js" 
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+
+}
