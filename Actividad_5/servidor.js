@@ -1,8 +1,9 @@
 //Escribe un comentario explicando para qué sirve http
+// http es un módulo de Node.js que permite crear servidores web y manejar solicitudes HTTP. Es fundamental para construir aplicaciones web, ya que proporciona las herramientas necesarias para recibir y responder a las peticiones de los clientes, como navegadores web, y servir contenido dinámico o estático.
 import http from 'http';
 //Escribe un comentario explicando para qué sirve fs
 import fs from 'fs';
-
+// fs es un módulo de Node.js que proporciona una API para interactuar con el sistema de archivos. Permite leer, escribir, actualizar y eliminar archivos y directorios en el sistema operativo, lo que es esencial para manejar contenido dinámico en un servidor web.
 
     //Esta función deberá mostrar deberá mostrar una página HTML 
     //con la bienvenida a tu proyecto

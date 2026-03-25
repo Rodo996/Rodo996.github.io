@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buscador de Artistas</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
+  <style>
+    .demo { margin: 1em 0; }
+    .resultado-box { border: 2px solid #2ecc40; padding: 1em; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <main style="max-width: 800px; margin: 0 auto; padding: 20px;">
+    <h2>Busca a tu artista favorito</h2>
+    
+    <div class="flex two">
+      <div>
+        <input type="text" id="inputArtista" placeholder="Ej. Coldplay, Luis Miguel, Adele">
+      </div>
+      <div>
+        <button id="btnBuscar" class="success">Buscar en el Servidor</button>
+      </div>
+    </div>
+
+    <div class="flex two demo resultado-box">
+      <div id="contenedorBio">
+        <p><em>La biografía aparecerá aquí...</em></p>
+      </div>
+      <div id="contenedorImagen">
+        </div>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Escuchar el clic del botón de búsqueda
+      document.getElementById("btnBuscar").addEventListener("click", buscarArtista);
+    });
+
+    async function buscarArtista() {
+      // Obtener lo que el usuario escribió en el input
+      const nombreIngresado = document.getElementById("inputArtista").value;
+
+      // Si el input está vacío, no hacemos nada
+      if (!nombreIngresado) {
+        alert("Por favor, ingresa el nombre de un artista.");
+        return;
+      }
+
+      // La API de theaudiodb requiere que los espacios sean guiones bajos (ej. "Bruno Mars" -> "Bruno_Mars")
+      const nombreFormateado = nombreIngresado.trim().replace(/ /g, '_');
+
+      try {
+        // Hacemos la petición a NUESTRO servidor Node.js con el nombre dinámico
+        const respuesta = await fetch(`/api/artista/${nombreFormateado}`);
+        const datos = await respuesta.json();
+
+        // Si el servidor nos mandó un error (ej. artista no encontrado)
+        if (datos.error) {
+          alert(datos.error);
+          return;
+        }
+
+        // Seleccionamos los contenedores
+        const divBio = document.getElementById("contenedorBio");
+        const divImagen = document.getElementById("contenedorImagen");
+
+        // Limpiamos los resultados anteriores
+        divBio.innerHTML = "";
+        divImagen.innerHTML = "";
+
+        // Mostramos la nueva biografía
+        const textoArtista = document.createElement('p');
+        textoArtista.textContent = datos.biografia || "No hay biografía disponible.";
+        divBio.appendChild(textoArtista);
+
+        // Mostramos la nueva imagen si existe
+        if (datos.imagen) {
+          const imagenArtista = document.createElement('img');
+          imagenArtista.setAttribute('src', datos.imagen);
+          imagenArtista.style.maxWidth = "100%"; // Para que no se desborde
+          divImagen.appendChild(imagenArtista);
+        }
+
+      } catch (error) {
+        console.error("Hubo un problema con la petición:", error);
+        alert("Error al conectar con el servidor.");
+      }
+    }
+  </script>
+</body>
+</html>
