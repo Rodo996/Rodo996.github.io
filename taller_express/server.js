@@ -1,41 +1,213 @@
-const express = require('express');
-const path = require('path');
-const app = express(); // express es un framework de Node.js que facilita la creación de servidores web y APIs. 
-// Proporciona una estructura y herramientas para manejar rutas, solicitudes HTTP, middleware, y más, lo que simplifica el desarrollo de aplicaciones web y servicios RESTful.
-const PORT = 3000;
+//Escribe un comentario explicando para qué sirve http
+// http es un módulo de Node.js que permite crear servidores web y manejar solicitudes HTTP. Es fundamental para construir aplicaciones web, ya que proporciona las herramientas necesarias para recibir y responder a las peticiones de los clientes, como navegadores web, y servir contenido dinámico o estático.
+import http from 'http';
+//Escribe un comentario explicando para qué sirve fs
+import fs from 'fs';
+// fs es un módulo de Node.js que proporciona una API para interactuar con el sistema de archivos. Permite leer, escribir, actualizar y eliminar archivos y directorios en el sistema operativo, lo que es esencial para manejar contenido dinámico en un servidor web.
 
-// Configurar Express para servir archivos estáticos (tu HTML)
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Crear nuestro propio endpoint que el cliente consumirá
-app.get('/api/artista/:nombre', async (req, res) => {
-    const artista = req.params.nombre;
-    
-    try {
-        // 1. El servidor consume la API externa
-        const respuesta = await fetch(`https://www.theaudiodb.com/api/v1/json/123/search.php?s=${artista}`);
-        const datos = await respuesta.json();
-
-        // 2. Procesamiento: Seleccionamos SOLO los datos que el cliente necesita
-        if (datos.artists && datos.artists.length > 0) {
-            const infoArtista = datos.artists[0];
-            
-            const datosProcesados = {
-                biografia: infoArtista.strBiographyEN,
-                imagen: infoArtista.strArtistThumb
-            };
-            
-            // 3. Entregar los datos procesados al cliente
-            res.json(datosProcesados);
-        } else {
-            res.status(404).json({ error: 'Artista no encontrado' });
+    //Esta función deberá mostrar deberá mostrar una página HTML 
+    //con la bienvenida a tu proyecto
+    function darBienvenida(req, res) {
+       //Agrega lo mínimo necesario en bienvenida.html
+       
+      
+      fs.readFile('bienvenida.html', 'utf8', (error, data) => {
+        if (error) {
+           //Escribe qué significa el 500 
+          res.writeHead(500, { 'Content-Type': 'text/plain' }); //500 Internal Server Error indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.
+          res.end('Oh no!!!!');
+          return;
         }
-    } catch (error) {
-        console.error('Error al consumir la API:', error);
-        res.status(500).json({ error: 'Error interno del servidor' });
+        //Escribe qué significa el 200
+        res.writeHead(200, { 'Content-Type': 'text/html' }); // 200 ok indicates that the request has succeeded.
+        res.end(data);
+    });
     }
-});
 
-app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+
+    //Esta función deberá enviar un json con los datos de las mascotas
+    function getMascotas(req, res) {
+        //Esto representa un objeto JSON de una mascota
+        //Agrega otra mascota
+        const mascotas = [
+    { "nombre": "Pikachu", "color": "Amarillo" },
+    { "nombre": "Bulbasaur", "color": "Verde" }
+]; 
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      
+      //Escribe qué hace la función stringify y por qué la tenemos que usar
+      res.end(JSON.stringify(mascotas));
+      // la funcion stringify convierte un objeto JavaScript en una cadena JSON. La usamos para enviar datos estructurados a través de la red, ya que JSON es un formato de texto que puede ser fácilmente interpretado por diferentes lenguajes de programación.
+    }
+// Esta función consume una API externa desde el servidor,
+// procesa la información y se la entrega a tu cliente.
+    async function getDatosMusica(req, res) {
+    // Definimos qué artista buscar. Podrías hacerlo dinámico, pero lo dejaremos fijo por ahora.
+    const artista = 'daft_punk'; 
+    const apiUrl = `https://www.theaudiodb.com/api/v1/json/123/search.php?s=${artista}`;
+
+    try {
+        // 1. Hacemos la petición a la API externa
+        const respuestaExterna = await fetch(apiUrl);
+
+        // Si la API externa falla (ej. se cae el servidor de AudioDB)
+        if (!respuestaExterna.ok) {
+            throw new Error('Error al conectar con la API de AudioDB');
+        }
+
+        // 2. Convertimos la respuesta externa a un objeto JSON
+        const datosExternos = await respuestaExterna.json();
+
+        // 3. Procesamos los datos (Seleccionamos solo lo que nos importa)
+        // Verificamos que la API realmente encontró al artista
+        if (datosExternos.artists && datosExternos.artists.length > 0) {
+            const artistaInfo = datosExternos.artists[0];
+
+            // Armamos un nuevo objeto solo con la información limpia que queremos enviar al navegador
+            const datosProcesados = {
+                nombre: artistaInfo.strArtist,
+                estilo: artistaInfo.strStyle,
+                genero: artistaInfo.strGenre,
+                biografia: artistaInfo.strBiographyES || artistaInfo.strBiographyEN // Intenta español, si no, inglés
+            };
+
+            // 4. Enviamos nuestro JSON procesado al cliente
+            // Usamos charset=utf-8 para que los acentos en la biografía se vean bien
+            res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+            res.end(JSON.stringify(datosProcesados));
+            
+        } else {
+            // Si la API funcionó, pero no encontró al artista
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: "Artista no encontrado" }));
+        }
+
+    } catch (error) {
+        // Si algo sale mal en el proceso (ej. no hay internet)
+        console.error("Hubo un error:", error);
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end('Oh no!!!! Error interno del servidor al consumir la API externa.');
+    }
+}
+  
+    function mostrarPerfil(req, res) {
+        fs.readFile('perfil.html', 'utf8', (error, data) => {
+            if (error) {
+              res.writeHead(500, { 'Content-Type': 'text/plain' });
+              res.end('Oh no!!!!');
+              return;
+            }
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.end(data);
+        });
+      }
+
+     
+      function mostrarAdoptantes(req, res) {
+        //Construye una página básica adpotantes.html
+        fs.readFile('adoptantes.html', 'utf8', (error, data) => {
+            if (error) {
+              res.writeHead(500, { 'Content-Type': 'text/plain' });
+              res.end('Oh no!!!!');
+              return;
+            }
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.end(data);
+        });
+      }
+
+      function mostrarEquipo(req, res) {
+        fs.readFile('equipo.html', 'utf8', (error, data) => {
+            if (error) {
+                res.writeHead(500, { 'Content-Type': 'text/plain' });
+                res.end('Oh no!!!! Error interno del servidor.');
+                return;
+            }
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.end(data);
+        });
+      }
+      function mostrarOpinion(req, res) {
+        fs.readFile('opinion.html', 'utf8', (error, data) => {
+            if (error) {
+                res.writeHead(500, { 'Content-Type': 'text/plain' });
+                res.end('Oh no!!!! Error interno del servidor.');
+                return;
+            }
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.end(data);
+        });
+      }
+    //Esta función deberá enviar un json con los datos de las adoptantes
+    function getAdoptantes(req, res) {
+      adoptantes=[
+    { "nombre": "Ash Ketchum", "edad": 10 },
+    { "nombre": "Misty", "edad": 12 }
+      ]
+    //Tienes que corregir varias cosas en esta sección
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(adoptantes));
+    }
+
+    function manejarRuta404(req, res) {
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      //Cambia el mensaje por algo más divertido
+      res.end('la Página  esa que buscabas, pero asi de que buscabas bien chido sabes que paso? la encontramos, nah no cierto.');
+    }
+
+    //incluye el enlace a la documentación de createServer
+    const servidor = http.createServer((req, res) => {
+      const url = req.url;
+
+      if (url === '/') {
+        darBienvenida(req, res);
+      } else if (url === '/api/mascotas') {
+        getMascotas(req, res);
+      } else if (url === '/api/adoptantes') {
+        getAdoptantes(req, res);
+      } 
+      else if (url === '/api/adoptantes') {
+      getAdoptantes(req, res);
+      } else if (url === '/api/musica') {
+      // Agregamos la nueva ruta que llama a nuestra función
+      getDatosMusica(req, res);
+      } else if (url === '/mascotas') {
+        mostrarMascotas(req, res);
+      } 
+      else if (url === '/adoptantes') {
+        mostrarAdoptantes(req, res);
+      } else if (url === '/equipo') {
+        mostrarEquipo(req, res);
+      } else if (url === '/opinion') {
+        mostrarOpinion(req, res);
+      }
+      else {
+    // Aquí debería ir tu manejarRuta404(req, res) si ninguna ruta coincide
+    manejarRuta404(req, res);
+    }
+      //Agrega una ruta /equipo y su función correspondiente para que muestre el equipo del proyecto
+      //Haz una página equipo.html correspondiente
+      //Escribe el nombre completo y una cualidad que valores en esa persona de tu equipo
+      //Trata de agregar una imagen a equipo.html
+      //Explica si la puedes ver, en caso negativo ¿qué crees que pase?
+
+      /* La imagen no se puede ver en el archivo HTML 
+      Esto sucede porque el servidor no tiene una ruta /foto-equipo.jpg, asi que no sabe cómo entregar ese archivo y terminará cayendo en tu función manejarRuta404.
+      por estar hardcodeado no se puede.
+      */ 
+
+      //Agrega una ruta /opinion
+      // Haz una página opinion.html
+      // Lee el siguiente artículo y responde ¿Crees que el colonialismo digital es un riesgo para tu carrera profesionl? ¿Para tu vida persona?
+      //¿Qué es el freedombox?
+      //https://www.aljazeera.com/opinions/2019/3/13/digital-colonialism-is-threatening-the-global-south
+      
+    });
+
+    const puerto = 1984;
+    servidor.listen(puerto, () => {
+      console.log(`Servidor escuchando en el puerto ${puerto}`);
+    });
+
+    //Importante
+    //En esta actividad deberás agregar en miarchivo.html un enlace a servidor.js y al resto de los html
