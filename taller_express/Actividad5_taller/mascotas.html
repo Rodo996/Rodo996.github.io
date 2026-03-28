@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscando Huellas - Galería</title>
+    
+    <style>
+        /* Estilos generales y colores */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        /* Contenedor tipo cuadrícula que se adapta al tamaño de la pantalla */
+        #galeria-mascotas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        /* Diseño de la tarjeta de cada perrito/mascota */
+        .tarjeta-mascota {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.2s; /* Pequeña animación */
+        }
+
+        .tarjeta-mascota:hover {
+            transform: translateY(-5px); /* Se levanta un poco al pasar el mouse/dedo */
+        }
+
+        .nombre {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #e74c3c; /* Un color llamativo para el nombre */
+            margin-bottom: 10px;
+        }
+
+        .detalle {
+            font-size: 1em;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🐾 Mascotas Reportadas 🐾</h1>
+    
+    <div id="galeria-mascotas">
+        <p style="text-align: center; width: 100%;">Cargando huellas...</p>
+    </div>
+
+    <script>
+        // -------------------------------------------------------------------
+        // Lógica del Cliente (Navegador) para consumir nuestra propia API
+        // -------------------------------------------------------------------
+        async function cargarMascotas() {
+            try {
+                // 1. Hacemos la petición a nuestro propio servidor Express
+                const respuesta = await fetch('/api/mascotas');
+                
+                if (!respuesta.ok) {
+                    throw new Error('No se pudo conectar con el servidor');
+                }
+
+                // 2. Convertimos la respuesta a un arreglo de objetos JSON
+                const mascotas = await respuesta.json();
+                
+                // 3. Seleccionamos el contenedor vacío del HTML
+                const contenedor = document.getElementById('galeria-mascotas');
+                
+                // Limpiamos el texto de "Cargando huellas..."
+                contenedor.innerHTML = '';
+
+                // 4. Recorremos el arreglo de mascotas que nos mandó el servidor
+                mascotas.forEach(mascota => {
+                    // Creamos un div para la tarjeta
+                    const tarjeta = document.createElement('div');
+                    tarjeta.className = 'tarjeta-mascota';
+
+                    // Llenamos la tarjeta con los datos (ajusta 'color' por 'raza' o 'zona' según los datos de tu API)
+                    tarjeta.innerHTML = `
+                        <div class="nombre">${mascota.nombre}</div>
+                        <div class="detalle"><strong>Característica:</strong> ${mascota.color || mascota.raza || 'No especificada'}</div>
+                        ${mascota.zona ? `<div class="detalle"><strong>Zona:</strong> ${mascota.zona}</div>` : ''}
+                    `;
+
+                    // Agregamos la tarjeta terminada al contenedor principal
+                    contenedor.appendChild(tarjeta);
+                });
+
+            } catch (error) {
+                console.error("Error al cargar las mascotas:", error);
+                document.getElementById('galeria-mascotas').innerHTML = 
+                    '<p style="color: red; text-align: center; width: 100%;">Error al cargar las mascotas. Verifica que el servidor esté encendido.</p>';
+            }
+        }
+
+        // Ejecutamos la función en cuanto la página HTML se abre
+        cargarMascotas();
+    </script>
+
+</body>
+</html>
